@@ -1,32 +1,25 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <router-view></router-view>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import Vue from 'vue'
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default Vue.extend({
+  data () {
+    return {
+      /* 身份验证的URL */
+      loginUrl: 'http://api.hi-mr.com:81/changtongma/api/v1/user/authtoken',
+      url: 'http://api.hi-mr.com:81/changtongma/api/v1/user/subauthtoken',
+      /* 本机的token */
+      cookie: '',
+      usercode: '',
+      childCookie: '',
+      responseChildCookie: '',
+      controlLogo: 1
+    }
+  }
+})
+</script>
