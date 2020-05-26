@@ -17,6 +17,7 @@ export default Vue.extend({
       cookie: '',
       usercode: '',
       childCookie: '',
+      allChildCookie: '',
       responseChildCookie: '',
       controlLogo: 1
     }

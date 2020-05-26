@@ -12,7 +12,8 @@ function getchildtoken (url, ucode, token, subCode) {
   const user = {}
   const headConfig = {
     headers: {
-      Authorization: token
+      Authorization: token,
+      'Authorization-Key': ucode
     }
   }
   // const head = { Authorization: userInfo.Authorization, token: userInfo.Authorization }

@@ -123,6 +123,7 @@ export default Vue.extend({
     /* 得到子目录的token */
     getchild (e) {
       getchildtoken(this.$parent.$parent.url, this.$parent.$parent.usercode, this.$parent.$parent.cookie, e).then(res => {
+        this.$parent.$parent.allChildCookie = res.data
         this.$parent.$parent.childCookie = res.data.split('|')[1]
         this.$parent.$parent.responseChildCookie = res.data
       }).catch(res => {
@@ -131,7 +132,7 @@ export default Vue.extend({
     },
     /* 设置子目录 */
     getUserName () {
-      getusername(this.url, this.$parent.$parent.cookie).then(res => {
+      getusername(this.url, this.$parent.$parent.cookie, this.$parent.$parent.usercode).then(res => {
         // 校区列表
 
         const list = []
@@ -157,7 +158,7 @@ export default Vue.extend({
     },
     getTotal () {
       setInterval(() => {
-        getinfo(this.getinfoUrl, this.$parent.$parent.childCookie).then(res => {
+        getinfo(this.getinfoUrl, this.$parent.$parent.allChildCookie).then(res => {
           // 通行人数
           this.total.totalnumber = res.data[0]
           this.total.passnumber = res.data[1]
@@ -168,7 +169,7 @@ export default Vue.extend({
     /* 计算最近10个人员信息 */
     getPersonInfo () {
       setInterval(() => {
-        getpersontime(this.getpersonUrl, this.$parent.$parent.childCookie).then(res => {
+        getpersontime(this.getpersonUrl, this.$parent.$parent.allChildCookie).then(res => {
           const data = []
           for (let index = 0; index < res.data.length && index < 10; index++) {
             const element = res.data[index]
