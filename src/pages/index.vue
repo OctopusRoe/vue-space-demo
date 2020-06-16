@@ -170,7 +170,7 @@ export default Vue.extend({
     getPersonInfo () {
       setInterval(() => {
         getpersontime(this.getpersonUrl, this.$parent.$parent.allChildCookie).then(res => {
-          const data = []
+          let data = []
           for (let index = 0; index < res.data.length && index < 10; index++) {
             const element = res.data[index]
             element.name = element.name.replace(/\(.*\)/, ' ')
@@ -199,6 +199,7 @@ export default Vue.extend({
             data.push(element)
           }
           this.person = data
+          data = null
         })
       }, 5000)
     },
@@ -219,6 +220,7 @@ export default Vue.extend({
       setInterval(() => {
         renewaltoken(this.tokenURL, document.cookie)
         renewaltoken(this.tokenURL, this.$parent.$parent.responseChildCookie)
+        this.person = null
       }, 300000)
     }
   },
@@ -227,7 +229,6 @@ export default Vue.extend({
     this.getTotal()
     this.getPersonInfo()
     this.settoken()
-    console.log(document.cookie)
   },
   components: {
     logo,
